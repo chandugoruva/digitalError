@@ -1,0 +1,13 @@
+.bg-color {
+  background-image: linear-gradient(to right, #ffffff, #cffcf1);
+  height: 100vh;
+  padding: 20px;
+}
+.bg-timer1 {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/digital-timer-elapsed-bg.png');
+  height: 100vh;
+}
+.timer {
+  background-color: #ffffff;
+  width: 1140px;
+}
