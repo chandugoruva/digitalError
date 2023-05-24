@@ -51,7 +51,7 @@ class DigitalTimer extends Component {
     const {start} = this.state
 
     if (start === false) {
-      const intervalId = setInterval(this.changeStartTimer, 1000)
+      this.intervalId = setInterval(this.changeStartTimer, 1000)
       this.setState(prevState => ({start: !prevState.start}))
     } else {
       clearInterval(this.intervalId)
@@ -61,11 +61,13 @@ class DigitalTimer extends Component {
 
   onReset = () => {
     const {start} = this.state
-    if (start === true) {
-      this.setState({
-        start: true,
-      })
-    }
+
+    this.setState({
+      start: false,
+      sec: 0,
+      time: 25,
+    })
+
     clearInterval(this.intervalId)
   }
 
@@ -73,6 +75,7 @@ class DigitalTimer extends Component {
     const {time, start, sec, min} = this.state
     const text1 = start ? 'Running' : 'Paused'
     const text = start ? 'Pause' : 'Start'
+    const icon = start ? 'pause icon' : 'play icon'
 
     const finalMin = time < 10 ? ` 0${time}` : time
     const finalSec = sec < 10 ? `0${sec}` : sec
@@ -94,10 +97,11 @@ class DigitalTimer extends Component {
           <div>
             <div className="startAndPause">
               <div className="for-flex">
-                <img src={isStart} alt="play icon" className="start-image" />
+                <img src={isStart} alt={icon} className="start-image" />
                 <button
                   className="start-text button1"
                   onClick={this.changeStart}
+                  type="button"
                 >
                   {text}
                 </button>
@@ -108,7 +112,11 @@ class DigitalTimer extends Component {
                   alt="reset icon"
                   className="reset-image"
                 />
-                <button className="reset-text button1" onClick={this.onReset}>
+                <button
+                  className="reset-text button1"
+                  onClick={this.onReset}
+                  type="button"
+                >
                   Reset
                 </button>
               </div>
